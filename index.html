@@ -315,7 +315,7 @@
                 <img class="gift-bank-logo" src="/assets/bca.png" alt="Logo Bank BCA" loading="lazy">
                 <div class="gift-card-divider"></div>
                 <p class="gift-account-label">Nomor rekening contoh</p>
-                <p class="gift-account-number">1234 5678 1234</p>
+                <p class="gift-account-number">1234 5678 1234 5678</p>
                 <p class="gift-account-owner">El Rumi</p>
                 <button class="btn gift-copy-button" type="button">
                   Salin nomor
@@ -339,7 +339,99 @@
         </div>
       </section>
 
+      <section id="rsvp" class="rsvp-section">
+        <div class="container">
+          <div class="row g-4 align-items-center justify-content-center">
+            <div class="col-12 col-lg-5">
+              <div class="rsvp-heading">
+                <p class="rsvp-eyebrow">We would love to hear from you</p>
+                <h2>RSVP</h2>
+                <p>Mohon konfirmasi kehadiran dan tinggalkan ucapan untuk kami.</p>
+              </div>
+            </div>
+
+            <div class="col-12 col-lg-7">
+              <form id="rsvpForm" class="rsvp-form">
+                <div class="mb-3">
+                  <label for="rsvpGuestName" class="form-label">Nama</label>
+                  <input
+                    id="rsvpGuestName"
+                    name="guestName"
+                    class="form-control"
+                    type="text"
+                    value=""
+                    readonly
+                    required
+                  >
+                  <div class="form-text">Nama terisi otomatis dari undangan.</div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="rsvpGreeting" class="form-label">Ucapan</label>
+                  <textarea
+                    id="rsvpGreeting"
+                    name="greeting"
+                    class="form-control"
+                    rows="4"
+                    maxlength="1000"
+                    placeholder="Tuliskan ucapan untuk kedua mempelai"
+                    required
+                  ></textarea>
+                </div>
+
+                <div class="mb-4">
+                  <label for="rsvpAttendance" class="form-label">Kehadiran</label>
+                  <select id="rsvpAttendance" name="attendance" class="form-select" required>
+                    <option value="" selected disabled>Pilih konfirmasi kehadiran</option>
+                    <option value="Hadir">Hadir</option>
+                    <option value="Tidak Hadir">Tidak Hadir</option>
+                  </select>
+                </div>
+
+                <div class="rsvp-honeypot" aria-hidden="true">
+                  <label for="rsvpWebsite">Website</label>
+                  <input id="rsvpWebsite" name="website" type="text" tabindex="-1" autocomplete="off">
+                </div>
+
+                <button id="rsvpSubmit" class="btn btn-rsvp" type="submit">
+                  Kirim RSVP
+                </button>
+                <p id="rsvpStatus" class="rsvp-status" role="status" aria-live="polite"></p>
+              </form>
+            </div>
+          </div>
+
+          <div class="rsvp-messages">
+            <div class="rsvp-messages-heading">
+              <p class="rsvp-eyebrow">Ucapan dari keluarga dan teman</p>
+              <h3>Pesan untuk El &amp; Syifa</h3>
+              <p>Ucapan dan konfirmasi kehadiran yang dikirim akan terlihat oleh semua pengunjung.</p>
+            </div>
+            <p id="rsvpMessagesStatus" class="rsvp-messages-status" role="status" aria-live="polite">
+              Memuat ucapan...
+            </p>
+            <div id="rsvpMessagesList" class="rsvp-messages-list"></div>
+          </div>
+        </div>
+      </section>
+
       <div id="copyToast" class="copy-toast" role="status" aria-live="polite" aria-atomic="true"></div>
+      <div class="music-player">
+        <button
+          id="musicToggle"
+          class="music-toggle"
+          type="button"
+          aria-label="Putar musik"
+          aria-pressed="false"
+          title="Putar musik"
+        >
+          <svg class="music-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M8 5v14l11-7z" fill="currentColor"></path>
+          </svg>
+        </button>
+      </div>
+      <audio id="backgroundMusic" src="/assets/biw.mp3" preload="auto" loop></audio>
+      <div id="musicStatus" class="visually-hidden" role="status" aria-live="polite"></div>
 
       <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.9/dist/js/bootstrap.bundle.min.js"
