@@ -1,0 +1,69 @@
+:root {
+    --brown: #E29B6A;
+    --bg: #f7f5f5; 
+    --shadow: 4px 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+.hero {
+    color: white;
+    background-image: url('../assets/hero.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    height: 100%;
+}
+
+.hero h1{
+    color: var(--brown);
+    text-shadow: var(--shadow);
+    font-family: 'Sacramento', cursive;
+    font-size: 8rem;
+}
+
+.hero h3 {
+    font-family: 'Sacramento', cursive;
+    font-size: 6rem;
+    text-shadow: var(--shadow);
+}
+
+.hero h4 {
+    font-family: 'Times New Roman', serif;
+    font-size: 4rem;
+    text-shadow: var(--shadow);
+}
+
+.hero p {
+    font-family: 'Times New Roman', serif;
+    font-size: 2rem;
+    text-shadow: var(--shadow);
+}
+
+.hero .nama-tamu {
+    font-family: 'Sacramento', cursive;
+    font-size: 4rem;
+    text-shadow: var(--shadow);
+}
+
+@media (max-width: 1200px) {
+    html {
+        font-size: 90%;
+    }
+}
+
+@media (max-width: 992px) {
+    html {
+        font-size: 80%;
+    }
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 65%;
+    }
+}
+
+@media (max-width: 576px) {
+    html {
+        font-size: 60%;
+    }
+}
