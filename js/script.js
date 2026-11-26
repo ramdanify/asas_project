@@ -74,3 +74,61 @@ document.querySelector('.open-invitation').addEventListener('click', (event) => 
     document.body.classList.remove('scroll-locked');
     document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
 });
+
+async function copyAccountNumber(accountNumber) {
+    if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(accountNumber);
+        return;
+    }
+
+    const textArea = document.createElement('textarea');
+    textArea.value = accountNumber;
+    textArea.setAttribute('readonly', '');
+    textArea.style.position = 'fixed';
+    textArea.style.opacity = '0';
+    document.body.append(textArea);
+    textArea.select();
+    const copied = document.execCommand('copy');
+    textArea.remove();
+
+    if (!copied) {
+        throw new Error('Browser gagal menyalin nomor rekening.');
+    }
+}
+
+const copyToast = document.getElementById('copyToast');
+let copyToastTimeout;
+
+function showCopyToast() {
+    copyToast.textContent = 'Nomor rekening berhasil disalin.';
+    copyToast.classList.add('show');
+    window.clearTimeout(copyToastTimeout);
+    copyToastTimeout = window.setTimeout(() => {
+        copyToast.classList.remove('show');
+    }, 2200);
+}
+
+document.querySelectorAll('.gift-copy-button').forEach((button) => {
+    button.addEventListener('click', async () => {
+        try {
+            const accountNumber = button.closest('.gift-card')
+                .querySelector('.gift-account-number')
+                .textContent.replace(/\D/g, '');
+
+            if (!accountNumber) {
+                throw new Error('Nomor rekening belum diisi.');
+            }
+
+            await copyAccountNumber(accountNumber);
+            button.textContent = 'Tersalin!';
+            showCopyToast();
+        } catch (error) {
+            console.error('Gagal menyalin nomor rekening.', error);
+            button.textContent = 'Gagal menyalin';
+        }
+
+        window.setTimeout(() => {
+            button.textContent = 'Salin nomor';
+        }, 1800);
+    });
+});
