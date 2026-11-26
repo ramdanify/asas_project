@@ -743,18 +743,6 @@
     font-size: 0.75rem;
 }
 
-@media (min-width: 992px) and (max-width: 1199.98px) {
-    .home .couple-text {
-        flex: 0 0 66.666667%;
-        max-width: 66.666667%;
-    }
-
-    .home .gambar-pasangan-wrapper {
-        flex: 0 0 33.333333%;
-        max-width: 33.333333%;
-    }
-}
-
 @media (max-width: 991.98px) {
     .mynavbar .offcanvas-body {
         display: flex;

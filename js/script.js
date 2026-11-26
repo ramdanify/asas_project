@@ -1,3 +1,11 @@
+document.querySelectorAll(
+    'h1, h2, h3, h4, h5, h6, p, span, img, a, button, label, input, textarea, select, iframe, article, form, time, .simply-countdown'
+).forEach((element) => {
+    if (!element.hasAttribute('data-aos')) {
+        element.setAttribute('data-aos', 'fade-up');
+    }
+});
+
 if (typeof window.AOS !== 'undefined') {
     window.AOS.init({ offset: -120 });
 }
@@ -110,12 +118,33 @@ musicToggle.addEventListener('click', () => {
     updateMusicButton(false);
 });
 
+const heroSection = document.querySelector('.hero');
+const homeSection = document.getElementById('home');
+
+function removeHeroAfterScroll() {
+    const homeTop = homeSection.getBoundingClientRect().top + window.scrollY;
+    if (window.scrollY < homeTop - 1) {
+        return;
+    }
+
+    heroSection.remove();
+    window.removeEventListener('scroll', removeHeroAfterScroll);
+    const newHomeTop = homeSection.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo(0, newHomeTop);
+
+    if (typeof window.AOS !== 'undefined') {
+        window.AOS.refreshHard();
+        window.dispatchEvent(new Event('scroll'));
+    }
+}
+
 document.querySelector('.open-invitation').addEventListener('click', (event) => {
     event.preventDefault();
     document.body.classList.remove('scroll-locked');
     musicPlayer.classList.add('is-visible');
     playBackgroundMusic();
-    document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
+    window.addEventListener('scroll', removeHeroAfterScroll, { passive: true });
+    homeSection.scrollIntoView({ behavior: 'smooth' });
 });
 
 async function copyAccountNumber(accountNumber) {
@@ -197,6 +226,7 @@ async function getSupabaseError(response) {
 function createRsvpMessage(entry) {
     const card = document.createElement('article');
     card.className = 'rsvp-message-card';
+    card.setAttribute('data-aos', 'fade-up');
 
     const header = document.createElement('div');
     header.className = 'rsvp-message-header';
@@ -268,6 +298,9 @@ async function loadRsvpMessages() {
         }
 
         rsvpMessagesList.replaceChildren(...entries.map(createRsvpMessage));
+        if (typeof window.AOS !== 'undefined') {
+            window.AOS.refreshHard();
+        }
         rsvpMessagesStatus.textContent = `${entries.length} ucapan terbaru`;
     } catch (error) {
         console.error('Gagal memuat ucapan RSVP.', error);
